@@ -14,6 +14,7 @@ mongoose
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", UserController.getAllUsers);
 app.get("/auth/me", chakAuth, UserController.profile);
