@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { registerValidation } from "./validations/auth.js";
 import chakAuth from "./utils/chakAuth.js";
+import cors from "cors"
 
 import * as UserController from "./controllers/UserController.js";
 
