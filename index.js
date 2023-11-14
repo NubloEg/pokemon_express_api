@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import { registerValidation } from "./validations/auth.js";
-import chakAuth from "./utils/chakAuth.js";
+import { registerValidation,authValidation } from "./validations.js";
+import checkAuth from "./utils/checkAuth.js";
 import cors from "cors"
 
 import * as UserController from "./controllers/UserController.js";
@@ -18,9 +18,11 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", UserController.getAllUsers);
-app.get("/auth/me", chakAuth, UserController.profile);
-app.post("/auth/login", UserController.login);
+app.get("/auth/me", checkAuth, UserController.profile);
+app.post("/auth/login", authValidation,UserController.login);
 app.post("/auth/register", registerValidation, UserController.register);
+
+app.patch("/pokemon",checkAuth, UserController.addPokemon);
 
 app.listen(4444, (err) => {
   if (err) {

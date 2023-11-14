@@ -15,6 +15,10 @@ const UserSchema= new mongoose.Schema({
         required:true,
     },
     avatarUrl:String,
+    pokemons:{
+        type:Array,
+        default:[]
+    },
 },{
     timestamps:true
 });

@@ -123,3 +123,24 @@ export const getAllUsers = async (req, res) => {
       });
   }
 };
+
+export const addPokemon = async (req, res) => {
+  try{
+    const user = await UserModel.findByIdAndUpdate({
+      _id:req.userId
+    },{
+      $push:{ pokemons: req.body.pokemonId }
+    },{
+      returnDocument:'after'
+    });
+
+    res.json(user)
+
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({
+        message: "Не удалось добавить покемона",
+      });
+  }
+};
