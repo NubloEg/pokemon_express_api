@@ -134,7 +134,7 @@ export const addPokemon = async (req, res) => {
       returnDocument:'after'
     });
 
-    res.json(user)
+    res.json(user.pokemons)
 
 
   }catch(e){
