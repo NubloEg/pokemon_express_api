@@ -1,15 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
-import { registerValidation,authValidation } from "./validations.js";
+import { registerValidation, authValidation } from "./validations.js";
 import checkAuth from "./utils/checkAuth.js";
-import cors from "cors"
+import cors from "cors";
 
 import * as UserController from "./controllers/UserController.js";
 
 mongoose
-  .connect(
-    "mongodb+srv://boroda4kak:eeggoorr1@pokemon.oi7mvsk.mongodb.net/pokemonApi?retryWrites=true&w=majority"
-  )
+  .connect(process.env.DB_URL)
   .then(() => console.log("DB ok"))
   .catch((err) => console.log("DB error", err));
 
@@ -19,12 +17,12 @@ app.use(cors());
 
 app.get("/", UserController.getAllUsers);
 app.get("/auth/me", checkAuth, UserController.profile);
-app.post("/auth/login", authValidation,UserController.login);
+app.post("/auth/login", authValidation, UserController.login);
 app.post("/auth/register", registerValidation, UserController.register);
 
-app.patch("/pokemon",checkAuth, UserController.addPokemon);
+app.patch("/pokemon", checkAuth, UserController.addPokemon);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err);
   }
