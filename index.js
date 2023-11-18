@@ -7,7 +7,7 @@ import cors from "cors";
 import * as UserController from "./controllers/UserController.js";
 
 mongoose
-  .connect(process.env.DB_URL)
+  .connect(process.env.DB_URL || "mongodb+srv://boroda4kak:eeggoorr1@pokemon.oi7mvsk.mongodb.net/pokemonApi?retryWrites=true&w=majority")
   .then(() => console.log("DB ok"))
   .catch((err) => console.log("DB error", err));
 
@@ -21,6 +21,7 @@ app.post("/auth/login", authValidation, UserController.login);
 app.post("/auth/register", registerValidation, UserController.register);
 
 app.patch("/pokemon", checkAuth, UserController.addPokemon);
+app.patch("/money", checkAuth, UserController.setMoney);
 
 app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
