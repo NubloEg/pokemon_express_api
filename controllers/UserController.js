@@ -165,3 +165,24 @@ export const setMoney = async (req, res) => {
       });
   }
 };
+
+export const setBossHp = async (req, res) => {
+  try{
+    const user = await UserModel.findByIdAndUpdate({
+      _id:req.userId
+    },{
+      $set:{boss:req.body.boss}
+    },{
+      returnDocument:'after'
+    });
+    
+    res.json(user.boss)
+
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({
+        message: "Транзакция не прошла",
+      });
+  }
+};
