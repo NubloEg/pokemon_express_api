@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
 
 import UserModel from "../models/User.js";
+import { now } from "mongoose";
 
 
 export const register = async (req, res) => {
@@ -183,6 +184,26 @@ export const setBossHp = async (req, res) => {
     console.log(e)
     res.status(500).json({
         message: "Босс не обновлен",
+      });
+  }
+};
+
+export const setToDayAction = async (req, res) => {
+  try{
+    const user = await UserModel.findByIdAndUpdate({
+      _id:req.userId
+    },{
+      $set:{updatedAt:Date.now()}
+    },{
+      returnDocument:'after'
+    });
+    
+    res.json(user)
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({
+        message: "Дата не обновлена",
       });
   }
 };
