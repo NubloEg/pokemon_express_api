@@ -193,7 +193,7 @@ export const setGetPokemon = async (req, res) => {
     const user = await UserModel.findByIdAndUpdate({
       _id:req.userId
     },{
-      $set:{getFirstPokemon:false}
+      $set:{getFirstPokemon:req.body.status}
     },{
       returnDocument:'after'
     });
@@ -213,7 +213,7 @@ export const setFightPokemon = async (req, res) => {
     const user = await UserModel.findByIdAndUpdate({
       _id:req.userId
     },{
-      $set:{fightToDay:false}
+      $set:{fightToDay:req.body.status}
     },{
       returnDocument:'after'
     });
