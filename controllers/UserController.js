@@ -172,7 +172,7 @@ export const setBossHp = async (req, res) => {
     const user = await UserModel.findByIdAndUpdate({
       _id:req.userId
     },{
-      $set:{boss:req.body.boss}
+      $set:{boss:req.body.boss},
     },{
       returnDocument:'after'
     });
@@ -188,12 +188,32 @@ export const setBossHp = async (req, res) => {
   }
 };
 
-export const setToDayAction = async (req, res) => {
+export const setGetPokemon = async (req, res) => {
   try{
     const user = await UserModel.findByIdAndUpdate({
       _id:req.userId
     },{
-      $set:{updatedAt:Date.now()}
+      $set:{getFirstPokemon:false}
+    },{
+      returnDocument:'after'
+    });
+    
+    res.json(user)
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({
+        message: "Дата не обновлена",
+      });
+  }
+};
+
+export const setFightPokemon = async (req, res) => {
+  try{
+    const user = await UserModel.findByIdAndUpdate({
+      _id:req.userId
+    },{
+      $set:{fightToDay:false}
     },{
       returnDocument:'after'
     });

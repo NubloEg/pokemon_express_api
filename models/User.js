@@ -23,6 +23,8 @@ const UserSchema= new mongoose.Schema({
         type:Number,
         default:1000
     },
+    getFirstPokemon:true,
+    fightToDay:true,
     boss:{
         type:Array,
         default:[{name:'BigDuck',url:"https://i.pinimg.com/564x/e5/83/b2/e583b27c52c5fe0813bdd140655cafb3.jpg",hpNow:10000,hpAll:10000},{name:'MonkeyBox',url:"https://i.pinimg.com/564x/8c/63/37/8c63377bfdb3fd5e852062a0f1d8777e.jpg",hpNow:30000,hpAll:30000}]

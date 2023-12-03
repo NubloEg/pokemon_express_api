@@ -23,7 +23,8 @@ app.post("/auth/register", registerValidation, UserController.register);
 app.patch("/pokemon", checkAuth, UserController.addPokemon);
 app.patch("/money", checkAuth, UserController.setMoney);
 app.patch("/boss", checkAuth, UserController.setBossHp);
-app.patch("/checkAction", checkAuth, UserController.setToDayAction);
+app.patch("/setAddPokemon", checkAuth, UserController.setGetPokemon);
+app.patch("/setFigntPokemon", checkAuth, UserController.setFightPokemon);
 
 app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
